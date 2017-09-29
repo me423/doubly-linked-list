@@ -31,14 +31,22 @@ class LinkedList {
     }
 
     at(index) {}
+    
 
-    insertAt(index, data) {}
+    insertAt(index, data) {
+
+    }
 
     isEmpty() {
         return (this.length === 0)
     }
 
-    clear() {}
+    clear() {
+        this.length = 0;
+        this._head = new Node(null, null, null);
+        this._tail = new Node(null, null, null);
+        return this;
+    }
 
     deleteAt(index) {}
 
@@ -46,5 +54,4 @@ class LinkedList {
 
     indexOf(data) {}
 }
-
 module.exports = LinkedList;
