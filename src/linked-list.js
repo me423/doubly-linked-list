@@ -19,7 +19,7 @@ class LinkedList {
         }
         this.length += 1;
 
-        return true;
+        return this;
     }
 
     head() {
@@ -90,7 +90,23 @@ class LinkedList {
         return this;
     }
 
-    deleteAt(index) {}
+    deleteAt(index) {
+        var current = this._head;
+        if (index === 0) {
+            this._head = current.next;
+            current.prev = null;
+        } else if (index < this.length && index > 0) {
+            for (var count = 0; count < index; count++) {
+                current = current.next;
+            }
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+        } else {
+            return this;
+        }
+        this.length--;
+        return this;
+    }
 
     reverse() {
         var tail = this._tail;
