@@ -30,11 +30,53 @@ class LinkedList {
         return this._tail.data;
     }
 
-    at(index) {}
-    
+    at(index) {
+        var cur = this._head;
+        for (var count = 0; count < this.length; count++) {
+            if (count == index) {
+                return cur.data;
+            } else {
+                cur = cur.next;
+            }
+        }
+    }
+    elementByIndex(index) {
+    var current = this._head;
+    var count = 0;
+    while (count < index) {
+      current = current.next;
+      count++;
+    }
+    return current;
+  }
 
     insertAt(index, data) {
+        var element = new Node(data, null, null);
+            if (index == 0) {
+                if (this.isEmpty()) {
+                    this._head = element;
+                    this._tail = element;
+                } else {
+                    element.next = this._head;
+                    this._head.prev = element;
+                }
 
+            } else
+                if (this.isEmpty()) {
+                    return this;
+                } else {
+                    if (index == this.length) {
+                        this.append(data);
+                    }  else {
+                            var a = this.elementByIndex(index);
+                            element.next = a;
+                            element.prev = a.prev;
+                            element.prev.next = element;
+                            a.prev = element;
+                        }
+                }
+            this.length++;
+            return this;
     }
 
     isEmpty() {
@@ -50,8 +92,31 @@ class LinkedList {
 
     deleteAt(index) {}
 
-    reverse() {}
+    reverse() {
+        var tail = this._tail;
+        var head = this._head;
+        for (var i = 0; i < this.length / 2; i++) {
+            var tdata = tail.data;
+            tail.data = head.data;
+            head.data = tdata;
+            tail = tail.prev;
+            head = head.next;
+        }
+        return this;
 
-    indexOf(data) {}
+    }
+
+    indexOf(data) {
+        var current = this._head; 
+        var result = 0;
+        for(var i = 0; i < this.length; i++){
+            if(data == current.data){
+                 result = i;
+                 return result;
+            } 
+            current = current.next; 
+        }
+        return (result == 0)? -1 : result;
+    }
 }
 module.exports = LinkedList;
